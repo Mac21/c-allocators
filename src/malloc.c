@@ -1,13 +1,18 @@
-#include "malloc.h"
 #include "stddef.h"
+#include "stdint.h"
 
-struct FREE_BLK {
-};
+#include "malloc.h"
 
-typedef struct FREE_BLK free_blk_t;
+#define BLK_SIZE 246
+#define FREE_LIST_SIZE 100
 
-free_blk_t FREE_LIST[100];
+typedef struct FREE_BLK_256 {
+  char  data[BLK_SIZE];
+} free_blk_256_t;
 
-void* malloc(size_t size) {
-  return NULL;
+free_blk_256_t FREE_256_LIST[FREE_LIST_SIZE];
+
+void* rtmalloc(size_t size) {
+  free_blk_256_t* temp = &FREE_256_LIST[0];
+  return (void*)temp;
 }
